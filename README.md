@@ -4,6 +4,9 @@ This mod backports the skin format from 1.8+.
 
 ![Demonstration](img.png)
 
+## Caching
+The client caches all the `GameProfile`s after loading them so you don't have to load them every time. If you want to reset this cache, hit `F3 + R`. This is also useful to update your skin without restarting your client.
+
 ## Configuration
 You can go to the mod options section and configure the mod. Currently, the only option available is `transparency`, which allows skins to be translucent.
 
