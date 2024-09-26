@@ -3,6 +3,7 @@ package me.kimovoid.reskin.skinfix;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import me.kimovoid.reskin.Reskin;
+import me.kimovoid.reskin.mixin.access.EntityPlayerAccessor;
 import me.kimovoid.reskin.mixin.access.GameProfileAccessor;
 import me.kimovoid.reskin.model.ReskinRenderPlayer;
 import net.minecraft.client.Minecraft;
@@ -32,9 +33,12 @@ public class SkinService {
     public void updatePlayer(AbstractClientPlayer player) {
         if (this.players.containsKey(player.getCommandSenderName())) {
             PlayerInfo info = this.players.get(player.getCommandSenderName());
-            ((GameProfileAccessor)player.getGameProfile()).setUuid(info.getId());
-
-            Minecraft.getMinecraft().func_152347_ac().fillProfileProperties(player.getGameProfile(), true);
+            if (info.getCachedProfile() == null) {
+                ((GameProfileAccessor) player.getGameProfile()).setUuid(info.getId());
+                Minecraft.getMinecraft().func_152347_ac().fillProfileProperties(player.getGameProfile(), true);
+                info.setProfile(player.getGameProfile());
+            }
+            ((EntityPlayerAccessor)player).setProfile(info.getCachedProfile());
             Minecraft.getMinecraft().func_152342_ad().func_152790_a(player.getGameProfile(), player, true);
         }
     }
@@ -85,5 +89,20 @@ public class SkinService {
 
         int hash = profile.hashCode();
         return hash % 2 == 1;
+    }
+
+    public void resetPlayers() {
+        this.players.clear();
+        this.locks.clear();
+        for (Object entity : Minecraft.getMinecraft().theWorld.loadedEntityList) {
+            if (!(entity instanceof AbstractClientPlayer)) {
+                continue;
+            }
+            AbstractClientPlayer p = (AbstractClientPlayer) entity;
+            ((EntityPlayerAccessor)p).setProfile(new GameProfile(p.getGameProfile().getId(), p.getGameProfile().getName()));
+            p.func_152121_a(MinecraftProfileTexture.Type.SKIN, null);
+            p.func_152121_a(MinecraftProfileTexture.Type.CAPE, null);
+            this.init(p);
+        }
     }
 }

@@ -5,6 +5,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import me.kimovoid.reskin.config.Config;
+import me.kimovoid.reskin.listener.KeyBindingEvents;
 import me.kimovoid.reskin.skinfix.SkinService;
 import net.minecraft.client.Minecraft;
 import cpw.mods.fml.common.Mod;
@@ -25,6 +26,7 @@ public class Reskin {
     public void init(FMLPreInitializationEvent event) {
         CONFIG = new Config(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(this);
+        FMLCommonHandler.instance().bus().register(new KeyBindingEvents());
     }
 
     @EventHandler

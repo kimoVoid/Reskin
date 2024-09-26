@@ -1,10 +1,13 @@
 package me.kimovoid.reskin.skinfix;
 
+import com.mojang.authlib.GameProfile;
+
 import java.util.UUID;
 
 public class PlayerInfo {
 
     private final UUID id;
+    private GameProfile cachedProfile;
     private String modelType;
 
     public PlayerInfo(UUID id, String modelType) {
@@ -22,5 +25,13 @@ public class PlayerInfo {
 
     public void setModelType(String modelType) {
         this.modelType = modelType;
+    }
+
+    public GameProfile getCachedProfile() {
+        return this.cachedProfile;
+    }
+
+    public void setProfile(GameProfile profile) {
+        this.cachedProfile = profile;
     }
 }
