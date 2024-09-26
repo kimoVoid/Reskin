@@ -1,0 +1,15 @@
+[
+{
+  "modid": "${modid}",
+  "name": "Reskin",
+  "description": "1.8+ skin port for 1.7.10",
+  "version": "${version}",
+  "mcversion": "${minecraft_version}",
+  "url": "https://github.com/kimoVoid/Reskin",
+  "updateUrl": "",
+  "authorList": ["kimoVoid"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.6",
+  "package": "me.kimovoid.reskin.mixin",
+  "refmap": "reskin.mixin.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "AbstractClientPlayerMixin",
+    "ImageBufferDownloadMixin",
+    "RenderManagerMixin",
+    "SkinManagerMixin"
+  ],
+  "mixins": [
+    "access.GameProfileAccessor"
+  ]
+}
