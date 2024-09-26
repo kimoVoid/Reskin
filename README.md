@@ -1,6 +1,6 @@
 # Reskin for Forge 1.7.10
 This mod backports the skin format from 1.8+.
-<br>It also loads skins/capes from player names instead of `GameProfile`s. Why? because this mod was made for Historical SMP, which is running on MC 1.7.4, a version that doesn't send `GameProfile` info to the clients.
+<br>It also loads skins/capes from player names instead of `GameProfile` textures. Why? because this mod was made for Historical SMP, which is running on MC 1.7.4, a version that doesn't send `GameProfile` texture info to the clients.
 
 ![Demonstration](img.png)
 
